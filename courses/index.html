@@ -1,0 +1,139 @@
+---
+layout: default
+title: "All Courses"
+description: "Browse our comprehensive collection of online courses covering AI, psychology, technology, business, and more. Learn from industry experts at your own pace."
+---
+
+<div class="blog-container">
+    <header class="blog-header">
+        <h1><i class="fas fa-graduation-cap"></i> All Courses</h1>
+        <p>Discover our comprehensive collection of expert-curated courses designed to help you master new skills and advance your career.</p>
+        
+        <div class="course-filters">
+            <button class="filter-btn active" data-filter="all">
+                <i class="fas fa-th-large"></i> All Courses
+            </button>
+            <button class="filter-btn" data-filter="technology">
+                <i class="fas fa-laptop-code"></i> Technology
+            </button>
+            <button class="filter-btn" data-filter="psychology">
+                <iconify-icon icon="solar:brain-bold"></iconify-icon> Psychology
+            </button>
+            <button class="filter-btn" data-filter="business">
+                <i class="fas fa-briefcase"></i> Business
+            </button>
+            <button class="filter-btn" data-filter="design">
+                <i class="fas fa-palette"></i> Design
+            </button>
+        </div>
+    </header>
+    
+    <div class="courses-grid">
+        {% for course in site.courses %}
+        <article class="course-card" data-category="{{ course.category }}">
+            <div class="course-banner">
+                <img src="{{ course.course_banner }}" alt="{{ course.title }}" loading="lazy">
+            </div>
+            
+            <div class="course-info">
+                <div class="course-meta">
+                    <span class="course-difficulty {{ course.course_difficulty | replace: ' ', '-' }}">
+                        <i class="fas fa-signal"></i> {{ course.course_difficulty | capitalize }}
+                    </span>
+                    <span class="course-length">
+                        <i class="fas fa-clock"></i> {{ course.course_length }}
+                    </span>
+                    <span class="course-access {{ course.course_access }}">
+                        <i class="fas fa-{% if course.course_access == 'free' %}unlock{% else %}lock{% endif %}"></i> 
+                        {{ course.course_access | capitalize }}
+                    </span>
+                </div>
+                
+                <h3 class="course-title">
+                    <a href="{{ course.url | relative_url }}">{{ course.title }}</a>
+                </h3>
+                
+                <p class="course-description">{{ course.course_description | strip_html | truncate: 120 }}</p>
+                
+                <div class="instructor-mini">
+                    <img src="{{ course.instructor_pfp }}" alt="{{ course.instructor }}" class="instructor-avatar">
+                    <span class="instructor-name">{{ course.instructor }}</span>
+                </div>
+                
+                <a href="{{ course.url | relative_url }}" class="btn btn-primary">
+                    <i class="fas fa-play"></i> Start Learning
+                </a>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+<style>
+.course-filters {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin: 2rem 0;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--text-medium);
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+@media (max-width: 768px) {
+    .course-filters {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .filter-btn {
+        width: 200px;
+        justify-content: center;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const courseCards = document.querySelectorAll('.course-card');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.dataset.filter;
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter courses
+            courseCards.forEach(card => {
+                if (filter === 'all' || card.dataset.category === filter) {
+                    card.style.display = 'block';
+                    card.style.animation = 'fadeIn 0.3s ease';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>

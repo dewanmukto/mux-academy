@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}</title>
+    
+    {% seo %}
+    
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://code.iconify.design/3/3.1.1/iconify.min.js"></script>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ '/assets/images/favicon.ico' | relative_url }}">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta property="og:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}">
+    <meta name="twitter:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="twitter:image" content="{{ '/assets/images/og-image.jpg' | absolute_url }}">
+    
+    <!-- Schema.org markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "{{ site.title }}",
+        "description": "{{ site.description }}",
+        "url": "{{ site.url }}",
+        "logo": "{{ '/assets/images/logo.png' | absolute_url }}",
+        "sameAs": [
+            "https://twitter.com/muxacademy",
+            "https://www.facebook.com/muxacademy"
+        ]
+    }
+    </script>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="nav-container">
+                <a href="{{ '/' | relative_url }}" class="nav-logo">
+                    <iconify-icon icon="solar:graduation-cap-bold" class="logo-icon"></iconify-icon>
+                    <span>Mux Academy</span>
+                </a>
+                
+                <div class="nav-menu" id="nav-menu">
+                    <a href="{{ '/' | relative_url }}" class="nav-link">
+                        <i class="fas fa-home"></i> Home
+                    </a>
+                    <a href="{{ '/courses/' | relative_url }}" class="nav-link">
+                        <i class="fas fa-book"></i> Courses
+                    </a>
+                    <a href="{{ '/blog/' | relative_url }}" class="nav-link">
+                        <i class="fas fa-blog"></i> Blog
+                    </a>
+                    <a href="{{ '/about/' | relative_url }}" class="nav-link">
+                        <i class="fas fa-info-circle"></i> About
+                    </a>
+                </div>
+                
+                <div class="nav-toggle" id="nav-toggle">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {{ content }}
+    </main>
+
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Mux Academy</h3>
+                <p>Empowering learners worldwide with high-quality, accessible education.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{{ '/courses/' | relative_url }}">All Courses</a></li>
+                    <li><a href="{{ '/blog/' | relative_url }}">Blog</a></li>
+                    <li><a href="{{ '/about/' | relative_url }}">About Us</a></li>
+                    <li><a href="{{ '/contact/' | relative_url }}">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Categories</h4>
+                <ul>
+                    <li><a href="{{ '/courses/#technology' | relative_url }}">Technology</a></li>
+                    <li><a href="{{ '/courses/#psychology' | relative_url }}">Psychology</a></li>
+                    <li><a href="{{ '/courses/#business' | relative_url }}">Business</a></li>
+                    <li><a href="{{ '/courses/#design' | relative_url }}">Design</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="{{ '/help/' | relative_url }}">Help Center</a></li>
+                    <li><a href="{{ '/privacy/' | relative_url }}">Privacy Policy</a></li>
+                    <li><a href="{{ '/terms/' | relative_url }}">Terms of Service</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; {{ 'now' | date: "%Y" }} Mux Academy. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

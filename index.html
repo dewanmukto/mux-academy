@@ -1,0 +1,178 @@
+---
+layout: default
+title: "Home"
+description: "Mux Academy - Advanced online learning platform offering courses in AI, psychology, technology, and more. Learn at your own pace with expert-curated content."
+---
+
+<section class="hero">
+    <div class="hero-container">
+        <h1>Learn Without Limits</h1>
+        <p>Master new skills with our comprehensive courses designed by industry experts. From AI and technology to psychology and business - your learning journey starts here.</p>
+        
+        <div class="hero-actions">
+            <a href="{{ '/courses/' | relative_url }}" class="btn btn-primary">
+                <i class="fas fa-rocket"></i> Explore Courses
+            </a>
+            <a href="{{ '/blog/' | relative_url }}" class="btn btn-secondary">
+                <i class="fas fa-blog"></i> Read Blog
+            </a>
+        </div>
+        
+        <div class="hero-stats">
+            <div class="stat-item">
+                <span class="stat-number">{{ site.courses.size }}+</span>
+                <span class="stat-label">Expert Courses</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">10K+</span>
+                <span class="stat-label">Active Learners</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">95%</span>
+                <span class="stat-label">Completion Rate</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-number">4.8/5</span>
+                <span class="stat-label">Average Rating</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="features-container">
+        <h2 class="section-title">Why Choose Mux Academy?</h2>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <iconify-icon icon="solar:brain-bold" class="feature-icon"></iconify-icon>
+                <h3>Expert-Curated Content</h3>
+                <p>Learn from industry professionals and subject matter experts who bring real-world experience to every lesson.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-mobile-alt feature-icon"></i>
+                <h3>Learn Anywhere</h3>
+                <p>Access your courses on any device, anytime. Our responsive platform adapts to your learning style and schedule.</p>
+            </div>
+            
+            <div class="feature-card">
+                <iconify-icon icon="solar:chart-square-bold" class="feature-icon"></iconify-icon>
+                <h3>Track Your Progress</h3>
+                <p>Monitor your learning journey with detailed progress tracking, achievements, and personalized recommendations.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-users feature-icon"></i>
+                <h3>Community Support</h3>
+                <p>Join a vibrant community of learners, share insights, ask questions, and grow together.</p>
+            </div>
+            
+            <div class="feature-card">
+                <iconify-icon icon="solar:diploma-bold" class="feature-icon"></iconify-icon>
+                <h3>Certificates</h3>
+                <p>Earn recognized certificates upon course completion to showcase your new skills to employers.</p>
+            </div>
+            
+            <div class="feature-card">
+                <i class="fas fa-infinity feature-icon"></i>
+                <h3>Lifetime Access</h3>
+                <p>Once enrolled, access your courses forever. Learn at your own pace without time constraints.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="featured-courses">
+    <div class="features-container">
+        <h2 class="section-title">Featured Courses</h2>
+        
+        <div class="courses-grid">
+            {% assign featured_courses = site.courses | where: "featured", true | limit: 3 %}
+            {% for course in featured_courses %}
+            <article class="course-card" data-category="{{ course.category }}">
+                <div class="course-banner">
+                    <img src="{{ course.course_banner }}" alt="{{ course.title }}" loading="lazy">
+                </div>
+                
+                <div class="course-info">
+                    <div class="course-meta">
+                        <span class="course-difficulty {{ course.course_difficulty | replace: ' ', '-' }}">
+                            <i class="fas fa-signal"></i> {{ course.course_difficulty | capitalize }}
+                        </span>
+                        <span class="course-length">
+                            <i class="fas fa-clock"></i> {{ course.course_length }}
+                        </span>
+                        <span class="course-access {{ course.course_access }}">
+                            <i class="fas fa-{% if course.course_access == 'free' %}unlock{% else %}lock{% endif %}"></i> 
+                            {{ course.course_access | capitalize }}
+                        </span>
+                    </div>
+                    
+                    <h3 class="course-title">
+                        <a href="{{ course.url | relative_url }}">{{ course.title }}</a>
+                    </h3>
+                    
+                    <p class="course-description">{{ course.course_description | strip_html | truncate: 120 }}</p>
+                    
+                    <div class="instructor-mini">
+                        <img src="{{ course.instructor_pfp }}" alt="{{ course.instructor }}" class="instructor-avatar">
+                        <span class="instructor-name">{{ course.instructor }}</span>
+                    </div>
+                    
+                    <a href="{{ course.url | relative_url }}" class="btn btn-primary">
+                        <i class="fas fa-play"></i> Start Learning
+                    </a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="{{ '/courses/' | relative_url }}" class="btn btn-secondary">
+                <i class="fas fa-th-large"></i> View All Courses
+            </a>
+        </div>
+    </div>
+</section>
+
+<section class="latest-blog">
+    <div class="features-container">
+        <h2 class="section-title">Latest from Our Blog</h2>
+        
+        <div class="blog-grid">
+            {% for post in site.posts limit: 3 %}
+            <article class="blog-card">
+                {% if post.featured_image %}
+                <div class="blog-card-image">
+                    <img src="{{ post.featured_image }}" alt="{{ post.title }}" loading="lazy">
+                </div>
+                {% endif %}
+                
+                <div class="blog-card-content">
+                    <div class="blog-card-meta">
+                        <time datetime="{{ post.date | date_to_xmlschema }}">
+                            <i class="fas fa-calendar"></i> {{ post.date | date: "%B %d, %Y" }}
+                        </time>
+                        <span class="read-time">
+                            <i class="fas fa-clock"></i> {{ post.content | number_of_words | divided_by: 200 | plus: 1 }} min read
+                        </span>
+                    </div>
+                    
+                    <h3 class="blog-card-title">
+                        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                    </h3>
+                    
+                    <p class="blog-card-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="{{ '/blog/' | relative_url }}" class="btn btn-secondary">
+                <i class="fas fa-blog"></i> Read More Articles
+            </a>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,66 @@
+title: Mux Academy
+description: "Advanced online learning platform offering courses in AI, psychology, technology, and more. Learn at your own pace with expert-curated content."
+baseurl: ""
+url: "https://muxacademy.github.io"
+author: "Mux Academy Team"
+email: "contact@muxacademy.com"
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:categories/:title/
+
+# Collections
+collections:
+  courses:
+    output: true
+    permalink: /courses/:name/
+  posts:
+    output: true
+    permalink: /blog/:year/:month/:day/:title/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "courses"
+    values:
+      layout: "course"
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# SEO
+twitter:
+  username: muxacademy
+  card: summary_large_image
+
+facebook:
+  app_id: 123456789
+  publisher: https://www.facebook.com/muxacademy
+
+social:
+  name: Mux Academy
+  links:
+    - https://twitter.com/muxacademy
+    - https://www.facebook.com/muxacademy
+    - https://www.linkedin.com/company/muxacademy
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - sample/
